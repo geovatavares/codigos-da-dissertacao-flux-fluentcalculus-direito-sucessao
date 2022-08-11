@@ -1,0 +1,19 @@
+avo(X,Y) :- masculino(X), pais(X,Z),pais(Z,Y).
+
+neta(X,Y) :- feminino(X), avo(Y,X).
+
+pai(X,Y) :- masculino(X),pais(X,Y).
+
+mae(X,Y) :- feminino(X),pais(X,Y).
+
+ascedente(X,Y) :- pais(X,Y).
+
+ascedente(X,Y) :- pais(X,Z),ascedente(Z,Y).
+
+descedente(X,Y) :- ascedente(Y,X).
+
+filha(X,Y) :- descedente(X,Y), feminino(X).
+
+irma(X,Y) :- pai(Z,X), pai(Z,Y), X\=Y.
+
+esposa(X,Y) :- conjuge(X,Y), feminino(X).

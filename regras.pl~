@@ -1,0 +1,48 @@
+decujus(X):- pessoa(X), morto(X), autor_heranca(X).
+
+herdeiro_conjuge(X,Y):- conjuge(X,Y), vivo(X), decujus(Y), comunhao_parcial(X,Y), write(X), write(' é herdeiro(a) de '), write(Y).
+
+herdeiro_descedente(X,Y):- descedente(X,Y), vivo(X), decujus(Y), write(X), write(' é herdeiro(a) de '), write(Y).
+
+herdeiro_pre_morto(X,Y):- descedente(X,Y), morto(X), decujus(Y).
+
+herdeiro_descedente_estirpe(X,Y):- descedente(X,Y), vivo(X), herdeiro_pre_morto(Y,_), write(X), write(' herda por estirpe a parte que cabia à'), write(Y).
+
+avo(X,Y) :- masculino(X), pais(X,Z),pais(Z,Y).
+
+neta(X,Y) :- feminino(X), avo(Y,X).
+
+pai(X,Y) :- masculino(X),pais(X,Y).
+
+mae(X,Y) :- feminino(X),pais(X,Y).
+
+ascedente(X,Y) :- pais(X,Y).
+
+ascedente(X,Y) :- pais(X,Z),ascedente(Z,Y).
+
+descedente(X,Y) :- ascedente(Y,X).
+
+filha(X,Y) :- descedente(X,Y), feminino(X).
+
+irma(X,Y) :- pai(Z,X), pai(Z,Y), X\=Y.
+
+esposa(X,Y) :- conjuge(X,Y), feminino(X).
+
+meeiro(X,Y):- decujus(Y), conjuge(X,Y), comunhao_universal(X,Y), vivo(X), write(X), write(' é meeiro dos bens de '), write(Y), write(', o meeiro(a) como regra fica com 50% do patrmônio do autor da Herança devido o regime de bens definido na constância do casamento.').
+
+herdeiros(X,Y):- herdeiro_conjuge(X,Y); herdeiro_descedente(X,Y).
+
+inventario(X):- patrimonio(X).
+
+vocacao_hereditaria(X, Y):- write(' São chamados à partilha dessa sucessão: '), meeiro(X,Y); herdeiros(X,Y); herdeiro_descedente_estirpe(X,Y).
+
+%partilha(X/Y):- patrimonio(X), qnt_herdeiro(Y).
+
+%partilha(X/Y):- quinhao is patrimonio(X), qnt_herdeiro(Y).
+
+%partilha(patrimonio,qnt_herdeiro,X):- X is patrimonio / qnt_herdeiro.
+
+
+ %:- herdeiro_descedente(true), herdeiro
+  %    quinhao_herdeiro_filho(X):- herdeiro_descedente(X), partilha(Y).
+

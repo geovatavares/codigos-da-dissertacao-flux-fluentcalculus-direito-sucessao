@@ -1,0 +1,41 @@
+autor_heranca(marcelo).
+
+patrimonio(500).
+qnt_herdeiro(3).
+
+pessoa(marcelo).
+pessoa(marta).
+pessoa(roberta).
+pessoa(andreia).
+pessoa(julia).
+pessoa(maria).
+
+morto(marcelo).
+morto(andreia).
+vivo(marta).
+vivo(roberta).
+vivo(julia).
+vivo(maria).
+
+masculino(marcelo).
+feminino(marta).
+feminino(roberta).
+feminino(andreia).
+feminino(julia).
+feminino(maria).
+
+pais(marcelo, roberta).
+pais(marcelo, andreia).
+pais(marta, roberta).
+pais(marta, andreia).
+pais(andreia, julia).
+pais(andreia, maria).
+
+conjuge(esposa, marido).
+
+comunhao_universal(marta, marcelo).
+comunhao_parcial(m,k).
+comunhao_separacao_convencional(carla,maria).
+comunhao_separacao_legal(s,a).
+%comunhao_final_nos_aquestros(,).
+%comunhao_misto(,).

@@ -1,0 +1,28 @@
+decujus(X):- pessoa(X), morto(X), autor_heranca(X).
+
+herdeiro_conjuge(X,Y):- conjuge(X,Y), vivo(X), decujus(Y), comunhao_parcial(X,Y), write(X), write(' é herdeiro(a) de '), write(Y).
+
+herdeiro_descedente(X,Y):- descedente(X,Y), vivo(X), decujus(Y), write(X), write(' é herdeiro(a) de '), write(Y).
+
+herdeiro_pre_morto(X,Y):- descedente(X,Y), morto(X), decujus(Y).
+
+herdeiro_descedente_estirpe(X,Y):- descedente(X,Y), vivo(X), herdeiro_pre_morto(Y,_), write(X), write(' herda por estirpe a parte que cabia à '), write(Y).
+
+meeiro(X,Y):- decujus(Y), conjuge(X,Y), comunhao_universal(X,Y), vivo(X), write(X), write(' é meeiro dos bens de '), write(Y), write(', o meeiro(a) como regra fica com 50% do patrimônio do autor da Herança devido ao regime de bens definido na constância do casamento.').
+
+herdeiros(X,Y):- herdeiro_conjuge(X,Y); herdeiro_descedente(X,Y).
+
+inventario(X):- patrimonio(X).
+
+vocacao_hereditaria(X, Y):- nl, write('São chamados à partilha dessa sucessão: '), nl, meeiro(X,Y); nl, herdeiros(X,Y); nl, herdeiro_descedente_estirpe(X,Y).
+
+%partilha(X/Y):- patrimonio(X), qnt_herdeiro(Y).
+
+%partilha(X/Y):- quinhao is patrimonio(X), qnt_herdeiro(Y).
+
+%partilha(patrimonio,qnt_herdeiro,X):- X is patrimonio / qnt_herdeiro.
+
+
+ %:- herdeiro_descedente(true), herdeiro
+  %    quinhao_herdeiro_filho(X):- herdeiro_descedente(X), partilha(Y).
+
